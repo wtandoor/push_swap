@@ -64,9 +64,9 @@ int div_stack_b(t_stack **stack_a, t_stack **stack_b, t_com **final, int len)
 	tmp = *stack_a;
 	rot = 0;
 	mid = find_mid(*stack_a, len);
-	while (tmp && part >= 0)
+	while (tmp && part > 0)
 	{
-		if (((*stack_a)->dif == 1 && tmp->n < mid) || ((*stack_a)->dif == 2 && tmp->n <= mid))
+		if (((*stack_a)->dif == 1 && tmp->n > mid) || ((*stack_a)->dif == 2 && tmp->n >= mid))
 		{
 			while ((*stack_a)->n != tmp->n)
 				rot = stack_rotation(stack_a, final, rot);
@@ -498,7 +498,7 @@ void global_sort(t_stack **stack_a, t_stack **stack_b, t_com **final, int len)//
 		rotate_back(stack_a, final, rot);
 	if (((*stack_a)->dif == 1) && (len / 2 == 3 || len / 2 == 2))
 		elements_swap(stack_a, stack_b, final, len);
-	else if ((*stack_a)->dif == 2 && (len / 2 == 3 || len / 2 == 2))
+	else if (((*stack_a)->dif == 2) && (len / 2 == 3 || len / 2 == 2))
 		elements_swap(stack_a, stack_b, final, len);
 	if ((*stack_a)->dif != 1)
 		global_sort(stack_a, stack_b, final, len / 2);
@@ -507,7 +507,7 @@ void global_sort(t_stack **stack_a, t_stack **stack_b, t_com **final, int len)//
 	if ((*stack_a)->dif == 1)
 		global_sort(stack_b, stack_a, final, len / 2);
 	else
-		global_sort(stack_b, stack_a, final, len - len / 2);
+		global_sort(stack_b, stack_a, final, len - len / 2);//tut
 	if ((*stack_a)->dif == 1)
 		push_back(stack_a, stack_b, final, len / 2);
 	else
